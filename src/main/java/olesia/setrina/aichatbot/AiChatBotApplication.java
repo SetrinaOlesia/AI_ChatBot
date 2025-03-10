@@ -8,8 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import olesia.setrina.aichatbot.Repository.ConversationRepository;
-import olesia.setrina.aichatbot.Repository.ProfileRepository;
+import olesia.setrina.aichatbot.repository.ConversationRepository;
+import olesia.setrina.aichatbot.repository.ProfileRepository;
 import olesia.setrina.aichatbot.conversations.ChatMessage;
 import olesia.setrina.aichatbot.conversations.Conversation;
 import olesia.setrina.aichatbot.model.Gender;
@@ -29,8 +29,13 @@ public class AiChatBotApplication implements CommandLineRunner {
     }
 
     public void run(String... args) {
+        profileRepository.deleteAll();
+        conversationRepository.deleteAll();
+
         Profile profile = new Profile("18", "Olesia", "Setrina", 37, "Ukrainian", "Java developer", Gender.Female, "test.url", "chess");
         profileRepository.save(profile);
+        Profile profile2 = new Profile("9", "Valera", "Maloy", 7, "polish", "qa", Gender.Male, "valera.url", "rum");
+        profileRepository.save(profile2);
         List<Profile> allProfiles = profileRepository.findAll();
         System.out.println(allProfiles);
 

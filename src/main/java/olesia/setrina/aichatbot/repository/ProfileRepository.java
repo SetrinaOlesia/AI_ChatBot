@@ -1,4 +1,4 @@
-package olesia.setrina.aichatbot.Repository;
+package olesia.setrina.aichatbot.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
