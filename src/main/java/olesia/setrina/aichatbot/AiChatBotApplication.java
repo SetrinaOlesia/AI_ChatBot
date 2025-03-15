@@ -3,17 +3,18 @@ package olesia.setrina.aichatbot;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import olesia.setrina.aichatbot.repository.ConversationRepository;
-import olesia.setrina.aichatbot.repository.ProfileRepository;
 import olesia.setrina.aichatbot.conversations.ChatMessage;
 import olesia.setrina.aichatbot.conversations.Conversation;
 import olesia.setrina.aichatbot.model.Gender;
 import olesia.setrina.aichatbot.model.Profile;
+import olesia.setrina.aichatbot.repository.ConversationRepository;
+import olesia.setrina.aichatbot.repository.ProfileRepository;
 
 @SpringBootApplication
 public class AiChatBotApplication implements CommandLineRunner {
@@ -24,11 +25,18 @@ public class AiChatBotApplication implements CommandLineRunner {
     @Autowired
     private ConversationRepository conversationRepository;
 
+    @Autowired
+    private OpenAiChatModel openAiChatModel;
+
     public static void main(String[] args) {
         SpringApplication.run(AiChatBotApplication.class, args);
     }
 
     public void run(String... args) {
+
+        String response = openAiChatModel.call("?");
+        System.out.println(response);
+
         profileRepository.deleteAll();
         conversationRepository.deleteAll();
 
